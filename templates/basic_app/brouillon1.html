@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Genius</title>
+</head>
+<body>
+<!-- Navigation Bar -->
+<div class="w3-bar w3-blue-grey">
+  <img src="static/logo.png" class="w3-bar-item w3-button" style="width:6%; height:10% filter:grayscale(10);">
+  <a href="{% url 'basic_app:index' %}" class="w3-bar-item w3-button w3-mobile w3-green w3-xlarge"><i class="fa fa-home"></i></a>
+  <a href="{% url 'basic_app:index' %}" class="w3-bar-item w3-button w3-mobile w3-xlarge">A Propos</a>
+  <a href="{% url 'basic_app:train' %}" class="w3-bar-item w3-button w3-mobile w3-xlarge">Entrainement</a>
+</div>
+<br>
+
+<br>
+        <div id="consolesection" class="w3-row w3-border-red" style="height:500px">
+          <div id="bridge" class="w3-col" style="max-width:20px">
+                <div class="w3-container w3-teal w3-cell"></div>
+          </div>
+          <div id="left blank" class="w3-col" style="max-width:200px; height:500px">
+            <Section class="consolehead">
+                <div class="w3-container w3-teal w3-cell">
+                  <p>Left Gap will be blank.</p>
+                </div>
+            </Section>
+          </div>
+
+          <div id="middle Console" class="w3-col" style="max-width:700px">
+            <Section id="consolebody" class="w3-card w3-round-large w3-leftbar w3-topbar w3-rightbar w3-bottombar w3-border-red w3-grey" style="height:500px;">
+                <div class="w3-container w3-purple w3-cell">
+                  <p>Inside Console.</p>
+                </div>
+
+                <div class="w3-container w3-green w3-cell">
+                  <p>Inside console Middle.</p>
+                </div>
+
+                <div class="w3-container w3-blue w3-cell">
+                  <p>Exams as well.</p>
+                </div>
+
+                <div class="w3-container w3-yellow w3-cell">
+                  <p>Points Counter.</p>
+                </div>
+                <div class="w3-container w3-green w3-cell">
+                  <p>Console Smileys.</p>
+                </div>
+            </Section>
+          </div>
+          <div id="bridge" class="w3-col" style="max-width:20px">
+                <div class="w3-container w3-teal w3-cell"></div>
+          </div>
+          <div id="right blank" class="w3-col" style="max-width:300px">
+                <div class="w3-container w3-teal w3-cell">
+                  <p>right Gap for further selections.</p>
+                </div>
+          </div>
+        </div>
+
+</body>
+
+<!--Bottom Bar -->
+  <div class="w3-bar w3-bottom w3-left-align w3-large w3-white w3-border-top w3-border-blue-grey">
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-white w3-text-black w3-hover-blue-grey w3-display-center">Genius | 2019</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-white w3-text-black w3-hover-blue-grey">Nous Contacter</a>
+  </div>
+</html>

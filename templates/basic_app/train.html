@@ -1,0 +1,264 @@
+{% extends 'basic_app/base.html' %}
+    {% load static %}
+
+    {% block content %}
+<!--<script src='{% static "genius_scripts.js" %}' type="text/javascript"></script> -->
+{% if question %}
+
+<div class="w3-cell-row w3-yellow w3-center" style="height:15px padding:0px">
+    <h4>Now Let's Train under basic_app</h4>
+</div>
+<div id="consoleHead" class="w3-cell-row" style="height:20px"></div>
+
+<div id="consoldeBody" class="w3-cell-row" style="">
+
+    <div id='consoleleftboard ' class="w3-cell " style="width:14%; background:#65909A;">
+
+    </div>
+
+    <div id='whitegapleft' class="w3-cell " style="width:2%"></div>
+
+    <div id='consoleMiddle' class="w3-cell w3-round-large" style=" border-width:1px;border-style:solid; border-color:#73CAF0; width:51%; margin:auto">
+            <div id='' class="w3-cell-row" style="width:99.5%; height:40px; margin:auto;background:#73CAF0;"></div>
+            <div id='' class="w3-cell-row" style="width:100%; height:4px"></div>
+            <div id='consoleMiddle1' class="w3-cell" style="width:48%;background:#FFFFFF;">
+                <div class="w3-container" style="height:4px"></div>
+                <div id="qst" class="w3-container w3-left-align w3-large" style="height:60px;border-style:solid;border-width:1px; border-color:#73CAF0;background:#FFFFFF; height:100px;margin:auto; width:99%">{{question.qText}}</div>
+                <div id="sms" class="w3-container w3-left-align w3-large w3-border-light-grey hidden" style="background:#FFFFFF; border-style:solid; height:60px;">{{question.qSms}}</div>
+                <div id="sol" class="w3-container w3-left-align w3-large w3-border-light-grey hidden" style="border-style:solid;height:80px">{{question.qSol}}</div>
+            </div>
+
+            <div id='' class="w3-cell" style="width:1%"></div>
+
+            <div id='consoleMiddle2' class="w3-cell " style="background:#FFFFFF; width:48%">
+                <div class="w3-container" style="height:4px"></div>
+                <div id="pr1" class="w3-container w3-left-align w3-large" style="background:#FFFFFF;border-width:1px;border-color:#73CAF0;border-style:solid; height:100px;margin:auto; width:99%">{{question.qPrompt1}}</div>
+                <div class="w3-container" style="height:4px"></div>
+                <div id="pr2" class="w3-container w3-left-align w3-large" style="background:#FFFFFF;border-width:1px;border-color:#73CAF0;border-style:solid; height:100px;margin:auto; width:99% ">{{question.qPrompt2}}</div>
+                <div class="w3-container" style="height:4px"></div>
+                <div id="pr3" class="w3-container w3-left-align w3-large" style="background:#FFFFFF;border-width:1px;border-color:#73CAF0;border-style:solid; height:100px;margin:auto; width:99% ">{{question.qPrompt3}}</div>
+                <div class="w3-container" style="height:5px"></div>
+                <div id="btn1" class="w3-card w3-large w3-center w3-green" style="width:150px; height:40px; margin-left:55%" >Valider</div>
+                <div class="w3-container" style="height:5px"></div>
+                <div id="btnxt" class="w3-card w3-large hidden w3-center" style="width:150px; height:40px;background:#BAE4F5; margin-left:55%" >Prochaine</div>
+                <input id="ans"  style="visibility:hidden" value={{question.qAnswer}}>
+                <input id="nxt" style="visibility:hidden" value={{question.qSuccessNext}}>
+                <input id="fail1" class="hidden"  style="visibility:hidden" value={{question.qFailNext1}}>
+                <input id="fail2" class="hidden"  style="visibility:hidden" value={{question.qFailNext2}}>
+                <input id="fail3" class="hidden"  style="visibility:hidden" value={{question.qFailNext3}}>
+                <p id="rel" class="hidden" style="visibility:hidden">No_Score</p>
+            </div>
+    </div>
+    <div id='whitegapright' class="w3-cell" style="width:2%">
+    </div>
+    <div id='dashboard' class="w3-cell" style="width:25%; background:#7f7fff;">
+
+        <div class="w3-card w3-center" style="height:25px; background:#7f7fff;">RAPPORT DE PERFORMANCE
+        </div>
+        <div class="w3-container" style="top:50%;height:99px; padding:1px">
+              <table id="myTable" class="w3-table-all w3-card-4" style="font-size:10px; width:100%;">
+                <tr class="w3-purple">
+                  <th class="w3-white" style="width:25%"></th>
+                  <th class="w3-center" style="width:25%">Succes</th>
+                  <th class="w3-teal w3-center" style="width:25%">Total</th>
+                  <th class="w3-blue-grey w3-center" style="width:25%">% Correct</th>
+                </tr>
+                <tr class="w3-purple">
+                  <td class="w3-white" >Reponses</td>
+                  <td class="w3-center"></td>
+                  <td class="w3-teal w3-center"></td>
+                  <td class="w3-blue-grey w3-center"></td>
+                </tr>
+                <tr class="w3-purple">
+                  <td class="w3-white">Score</td>
+                  <td class="w3-center"></td>
+                  <td class="w3-center w3-teal"></td>
+                  <td class="w3-center w3-blue-grey"></td>
+                </tr>
+
+              </table>
+        </div>
+        <div class="w3-container" style="height:245px; background:#ffffff;">
+            <canvas id="myChart" width="235" height="235"></canvas>
+        </div>
+        <div class="w3-container" style="height:45px; background:#ffffff;"></div>
+        </div>
+
+    </div>
+<br>
+<div class="w3-cell-row w3-purple w3-center" style="height:40px">
+    <h3>Tout ce qui suit c'est mon brouillon, sera enleve le moment venu</h3>
+</div>
+<br>
+{% for q in question %}
+
+<div id="{{q.pk}}Q" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qText}} </div>
+<div id="{{q.pk}}P1" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qPrompt1}} </div>
+<div id="{{q.pk}}P2" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qPrompt2}} </div>
+<div id="{{q.pk}}P3" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qPrompt3}} </div>
+<div id="{{q.pk}}A" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qAnswer}} </div>
+<div id="{{q.pk}}Sms" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSms}} </div>
+<div id="{{q.pk}}SmsF1" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSmsFail1}} </div>
+<div id="{{q.pk}}SmsF2" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSmsFail2}} </div>
+<div id="{{q.pk}}SmsF3" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSmsFail3}} </div>
+<div id="{{q.pk}}Sol" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSol}} </div>
+<div id="{{q.pk}}F1" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qFailNext1}} </div>
+<div id="{{q.pk}}F2" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qFailNext2}} </div>
+<div id="{{q.pk}}F3" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qFailNext3}} </div>
+<div id="{{q.pk}}NxtS" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qSuccessNext}} </div>
+<div id="{{q.pk}}qID" class="w3-card w3-red w3-center" style="width:500px; height:80px; margin:auto">{{q.qID}} </div>
+
+<br>
+<div id="NextQ" class="w3-card w3-orange w3-center" style="width:500px; height:80px; margin:auto">{{q.qID}} </div>
+<br>
+<br>
+{% endfor %}
+{% endif %}
+<script type="text/javascript" >
+var qID = []
+var qids = []
+var p1ids = []
+var p2ids = []
+var p3ids = []
+var a_ids = []
+var smsids = []
+var smsf1ids = []
+var smsf2ids = []
+var smsf3ids = []
+var sol_ids = []
+var f1_ids = []
+var f2_ids = []
+var f3_ids = []
+var nxt_ids = []
+
+qIDList = []
+qList = []
+p1List = []
+p2List = []
+p3List = []
+p3List = []
+aList = []
+smsList = []
+smsF1List = []
+smsF2List = []
+smsF3List = []
+solList = []
+f1List = []
+f2List = []
+f3List = []
+nxtsList = []
+
+
+var pks = [1,2,3,5,6]
+
+for (i=0;i<pks.length;i++){qids.push(pks[i]+'Q');p1ids.push(pks[i]+'P1');p2ids.push(pks[i]+'P2');p3ids.push(pks[i]+'P3');a_ids.push(pks[i]+'A');
+smsids.push(pks[i]+'Sms');sol_ids.push(pks[i]+'Sol');f1_ids.push(pks[i]+'F1');f2_ids.push(pks[i]+'F2');f3_ids.push(pks[i]+'F3');nxt_ids.push(pks[i]+'NxtS');qID.push(pks[i]+'qID');smsf1ids.push(pks[i]+'SmsF1');smsf2ids.push(pks[i]+'SmsF2');smsf3ids.push(pks[i]+'SmsF3')}
+
+for (j=0; j<pks.length; j++){qList.push(document.getElementById(qids[j]).innerHTML);p1List.push(document.getElementById(p1ids[j]).innerHTML);p2List.push(document.getElementById(p2ids[j]).innerHTML);
+p3List.push(document.getElementById(p3ids[j]).innerHTML);aList.push(document.getElementById(a_ids[j]).innerHTML);smsList.push(document.getElementById(smsids[j]).innerHTML);
+solList.push(document.getElementById(sol_ids[j]).innerHTML);f1List.push(document.getElementById(f1_ids[j]).innerHTML);f2List.push(document.getElementById(f2_ids[j]).innerHTML);
+f3List.push(document.getElementById(f3_ids[j]).innerHTML);nxtsList.push(document.getElementById(nxt_ids[j]).innerHTML);qIDList.push(document.getElementById(qID[j]).innerHTML);smsF1List.push(document.getElementById(smsf1ids[j]).innerHTML);smsF2List.push(document.getElementById(smsf2ids[j]).innerHTML);smsF3List.push(document.getElementById(smsf3ids[j]).innerHTML);}
+
+var q0 = document.querySelector('#qst')
+var q1 = document.querySelector('#pr1')
+var q2 = document.querySelector('#pr2')
+var q3 = document.querySelector('#pr3')
+var selected = document.querySelector('#rel')
+var q4 = document.querySelector('#pr1')
+var q5 = document.querySelector('#ans')
+var q6 = document.querySelector('#btn1')
+var q7 = document.querySelector('#btnxt')
+var q8 = document.querySelector('#sol')
+var q9 = document.querySelector('#sms')
+var q10 = document.querySelector('#NextQ')
+var t = document.querySelector('#myTable')
+var t1 = 0
+var t2 = 0
+var score = 0
+var count_ = 0
+var scorePos = count_*5
+var countBon = score/5
+var theScore = []
+var theCount = []
+var myScore = document.querySelector('#score')
+
+var qIndex = 0
+q0.innerHTML = qList[qIndex]
+q1.innerHTML = p1List[qIndex]
+q2.innerHTML = p2List[qIndex]
+q3.innerHTML = p3List[qIndex]
+q9.innerHTML = smsList[qIndex]
+q5.innerHTML = aList[qIndex][0]
+q8.innerHTML = solList[qIndex]
+selected.innerHTML='my_selection'
+
+q1.addEventListener('click', function(){
+q1.style.background = '#BAE4F5';q2.style.background = '#FFFFFF';q3.style.background = '#FFFFFF';selected.innerHTML='A';if(selected.innerHTML==q5.innerHTML[0]){q10.innerHTML=nxtsList[qIndex]; q9.style.background='#21AA93';} else { q9.innerHTML=smsF1List[qIndex];q9.style.background='#FAB95B'; q10.innerHTML=f1List[qIndex];};
+});
+q2.addEventListener('click', function(){
+q1.style.background = '#FFFFFF';q2.style.background = '#BAE4F5';q3.style.background = '#FFFFFF';selected.innerHTML='B';if(selected.innerHTML==q5.innerHTML[0]){q10.innerHTML=nxtsList[qIndex];q9.style.background='#21AA93';} else { q9.innerHTML=smsF2List[qIndex];q9.style.background='#FAB95B'; q10.innerHTML=f2List[qIndex];};
+});
+q3.addEventListener('click', function(){
+q1.style.background = '#FFFFFF';q2.style.background = '#FFFFFF';q3.style.background = '#BAE4F5';selected.innerHTML='C';if(selected.innerHTML==q5.innerHTML[0]){q10.innerHTML=nxtsList[qIndex];q9.style.background='#21AA93';} else { q9.innerHTML=smsF3List[qIndex];q9.style.background='#FAB95B'; q10.innerHTML=f3List[qIndex];};
+});
+
+q6.addEventListener('click', function(){if (q5.innerHTML[0] == selected.innerHTML){score += 5;;
+}else{};q7.classList.remove("hidden"); q8.classList.remove("hidden");q9.classList.remove("hidden");q6.classList.add("hidden");theScore.push(score); theCount.push(count_);count_ += 1;scorePos = count_*5; countBon = score/5;t1 = 100*score/scorePos; t2 = score/scorePos*100;
+t.rows[1].cells[1].innerHTML = countBon ;t.rows[1].cells[2].innerHTML = count_; t.rows[2].cells[1].innerHTML = score; t.rows[2].cells[2].innerHTML = scorePos; t.rows[2].cells[3].innerHTML = t1+'%'; t.rows[1].cells[3].innerHTML = t2+'%'; });
+
+q7.addEventListener('click', function(){
+q1.style.background = '#FFFFFF';q2.style.background = '#FFFFFF';q3.style.background = '#FFFFFF';selected.innerHTML='A';q6.classList.remove("hidden"); q8.classList.add("hidden");q9.classList.add("hidden");q7.classList.add("hidden");
+qIndex++;
+q0.innerHTML = qList[qIndex];
+q1.innerHTML = p1List[qIndex];
+q2.innerHTML = p2List[qIndex];
+q3.innerHTML = p3List[qIndex];
+q9.innerHTML = smsList[qIndex];
+q5.innerHTML = aList[qIndex][0];
+q8.innerHTML = solList[qIndex];
+})
+
+</script>
+
+<script>
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: 'Student Score',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+{% endblock %}

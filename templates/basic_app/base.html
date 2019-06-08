@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <title>Genius</title>
+    <style>
+        .hidden {
+         display: none !important;
+         }
+         .orange {
+         background:#FAB95B
+         }
+          .green {
+         background:#21AA93
+         }
+    </style>
+    <script src="static/genius_scripts.js"></script>
+</head>
+<body>
+<div class="w3-card w3-light-grey">
+    <img src='{% static "logo.png" %}' class="w3-bar-item w3-button" style="width:6%; height:10%"><a>is home of the Genius here1?</a>
+</div>
+<!-- Navigation Bar -->
+<div class="w3-bar w3-blue-grey">
+  <a href="{% url 'basic_app:index' %}" class="w3-bar-item w3-button w3-mobile w3-green w3-xlarge"><i class="fa fa-home"></i></a>
+  <a href="{% url 'basic_app:index' %}" class="w3-bar-item w3-button w3-mobile w3-xlarge">A Propos</a>
+  <a href="{% url 'basic_app:train' %}" class="w3-bar-item w3-button w3-mobile w3-xlarge">Genius Console</a>
+  <a href="{% url 'basic_app:index' %}" class="w3-bar-item w3-button w3-mobile w3-xlarge">Rapports</a>
+</div>
+{% block content %}
+{% endblock %}
+
+</body>
+
+<!--Bottom Bar -->
+  <div class="w3-bar w3-bottom w3-left-align w3-large w3-white w3-border-top w3-border-blue-grey">
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-white w3-text-black w3-hover-blue-grey w3-display-center">Genius | 2019</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-white w3-text-black w3-hover-blue-grey">Nous Contacter</a>
+  </div>
+
+</html>

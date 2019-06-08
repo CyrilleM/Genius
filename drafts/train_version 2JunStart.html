@@ -1,0 +1,111 @@
+{% extends 'basic_app/base.html' %}
+    {% load static %}
+    {% block content %}
+<!--<script src='{% static "genius_scripts.js" %}' type="text/javascript"></script> -->
+{% if question %}
+<div class="w3-container w3-yellow">
+<h4>Now Let's Train under basic_app</h4>
+</div >
+        <div id="consolesection" class="w3-row w3-border-red" style="height:500px; margin:auto">
+          <div id="bridge1" class="w3-col" style="max-width:20px">
+                <div class="w3-container w3-teal w3-cell"></div>
+          </div>
+          <div id="left blank" class="w3-col" style="max-width:200px; height:500px">
+            <Section class="consolehead">
+                <div class="w3-container w3-teal w3-cell">
+                  <p>Left Gap will be blank.</p>
+                </div>
+            </Section>
+          </div>
+
+          <div id="middle Console" class="w3-col" style="max-width:700px">
+            <Section id="consolebody" class="w3-card w3-round-large w3-leftbar w3-topbar w3-rightbar w3-bottombar w3-border-red w3-grey" style="height:500px;">
+                <div class="w3-container w3-purple w3-cell">
+                  <p>Inside Console.</p>
+                </div>
+
+                <div class="w3-container w3-green w3-cell">
+                  <p>Inside console Middle.</p>
+                </div>
+
+                <div class="w3-container w3-blue w3-cell">
+                  <p>Exams as well.</p>
+                </div>
+
+                <div class="w3-container w3-yellow w3-cell">
+                  <p>Points Counter.</p>
+                </div>
+                <div class="w3-container w3-green w3-cell">
+                  <p>Console Smileys.</p>
+                </div>
+                <div class="w3-card w3-light-grey w3-padding" style="width:680px; height:350px; margin:auto;">
+
+                    <p class="w3-large">{{question.qText}}</p>
+                    <button id="pr1" type="button" class="w3-button w3-left-align w3-large w3-border-bottom w3-border-light-grey" style="margin:auto; width:650px; background:#ADD8E6; border-style:solid ">{{question.qPrompt1}}</button>
+                    <button id="pr2" type="button" class="w3-button w3-left-align w3-large w3-border-bottom w3-border-light-grey" style="margin:auto; width:650px; background:#ADD8E6; border-style:solid ">{{question.qPrompt2}}</button>
+                    <button id="pr3" type="button" class="w3-button w3-left-align w3-large w3-border-bottom w3-border-light-grey" style="margin:auto; width:650px; background:#ADD8E6; border-style:solid ">{{question.qPrompt3}}</button>
+                    <button id="btn1" onclick="" class="w3-button, w3-xlarge w3-green" style="position:absolute; bottom:10; right:10; visibility:block;" >Check Answer</button>
+                    <br>
+                    <br>
+                    <button id="btnxt" onclick="" class="w3-button, w3-xlarge w3-blue" style="position:relative; visibility:hidden;" >Next</button>
+                    <input id="ans" style="visibility:hidden" value={{question.qAnswer}}>
+                    <input id="nxt" style="visibility:hidden" value={{question.qSuccessNext}}>
+                    <input id="fail1" style="visibility:hidden" value={{question.qFailNext1}}>
+                    <input id="fail2" style="visibility:hidden" value={{question.qFailNext2}}>
+                    <input id="fail3" style="visibility:hidden" value={{question.qFailNext3}}>
+                    <p id="rel" style="visibility:hidden">No_Score</p>
+
+                </div>
+            </Section>
+          </div>
+          <div id="bridge2" class="w3-col" style="max-width:20px">
+                <div class="w3-container w3-teal w3-cell"></div>
+          </div>
+          <div id="right blank" class="w3-col" style="max-width:300px">
+                <div class="w3-container w3-teal w3-cell">
+                  <p>right Gap for further selections.</p>
+                </div>
+          </div>
+        </div>
+        <div class="w3-card w3-light-grey w3-padding" style="width:700px; height:200px; margin:auto;">
+            <p id="">{{question.qAnswer}}</p>
+            <p id="score"></p>
+            <p>{{question.qPrompt2}}</p>
+            <p>{{question.qPrompt3}}</p>
+        </div>
+
+{% endif %}
+
+<script>
+var q1 = document.querySelector('#pr1')
+var q2 = document.querySelector('#pr2')
+var q3 = document.querySelector('#pr3')
+var selected = document.querySelector('#rel')
+var q4 = document.querySelector('#pr1')
+var q5 = document.querySelector('#ans')
+var q6 = document.querySelector('#btn1')
+var q7 = document.querySelector('#btnxt')
+var score = 0
+var myScore = document.querySelector('#score')
+
+q1.addEventListener('click', function(){
+q1.style.background = '#65909A';q2.style.background = '#ADD8E6';q3.style.background = '#ADD8E6';selected.innerHTML='A';
+});
+
+q2.addEventListener('click', function(){
+q1.style.background = '#ADD8E6';q2.style.background = '#65909A';q3.style.background = '#ADD8E6';selected.innerHTML='B';
+});
+
+q3.addEventListener('click', function(){
+q1.style.background = '#ADD8E6';q2.style.background = '#ADD8E6';q3.style.background = '#65909A';selected.innerHTML='C';
+});
+
+q6.addEventListener('click', function(){if (q5.value == selected.innerHTML){score += 5; myScore.innerHTML = score
+};q6.style.visibility = "hidden"; q7.style.visibility = "visible";  });
+
+q7.addEventListener('click', function(){
+q1.style.background = '#ADD8E6';q2.style.background = '#ADD8E6';q3.style.background = '#ADD8E6';selected.innerHTML='A';q6.style.visibility = "visible"; q7.style.visibility = "hidden";
+})
+</script>
+
+{% endblock %}
