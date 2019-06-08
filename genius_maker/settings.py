@@ -28,7 +28,7 @@ SECRET_KEY = '@(!g+34qresw*fe5hle!c8*$_l-fmd!k3b+pnyjkod2*+5sfzf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cyrillem.pythonanywhere.com',]
 
 
 # Application definition
