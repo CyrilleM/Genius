@@ -1,0 +1,30 @@
+{% extends 'basic_app/base.html' %}
+    {% load static %}
+{% block content %}
+<!--
+{% csrf_token %}
+<div div class="w3-cell w3-light-grey w3-center" style="height:300px;width:500px">
+  <br>
+    <form clas="w3-card" method = "POST">
+        <div>
+          <label>Question ID</label>
+          <input class="w3-grey" value= "{{qID}}">
+        </div>
+        <div>
+          <label>Student ID</label>
+          <input class="w3-grey" value= "{{studentID}}">
+        </div>
+        <div>
+          <label>Question Score</label>
+          <input class="w3-grey" value= "{{questionScore}}">
+        </div>
+        <input class="w3-green" type="submit" method = "POST" value="submit" style="width:80px; height:30px">
+    </form>
+</div>
+-->
+{{ form.as_p }}
+{% csrf_token %}
+<form >
+    <input class="w3-grey" type="submit" method = "POST" value="submit">
+</form>
+{% endblock %}

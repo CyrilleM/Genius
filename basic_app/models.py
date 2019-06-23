@@ -18,3 +18,7 @@ class Questions(models.Model):
     qSmsFail3 = models.CharField(max_length=50, null=True)
     qSol = models.CharField(max_length=50, null=True)
 
+class answersBase(models.Model):
+    studenID = models.CharField(max_length = 50)
+    qID = models.CharField(max_length = 50)
+    questionScore = models.PositiveIntegerField()

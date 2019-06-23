@@ -114,6 +114,14 @@
 <br>
 {% endfor %}
 {% endif %}
+<div class="w3-cell-row w3-green" style="height:15px;"></div>
+{{ form.as_p }}
+{% csrf_token %}
+
+<form >
+    <input class="w3-grey" type="submit" method = "POST" value="submit">
+<div class="w3-cell-row w3-green" style="height:300px;"></div>
+</form>
 <script type="text/javascript" >
 var qID = []
 var qids = []
